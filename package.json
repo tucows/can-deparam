@@ -12,6 +12,9 @@
     "email": "contact@bitovi.com",
     "url": "https://www.bitovi.com/"
   },
+  "publishConfig":{
+    "registry":"https://nexus.ci.dev.tucows.net/repository/npm-ting-hosted/"
+  },
   "scripts": {
     "preversion": "npm test && npm run build",
     "version": "git commit -am \"Update version number\" && git checkout -b release && git add -f dist/",

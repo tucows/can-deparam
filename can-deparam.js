@@ -25,7 +25,8 @@ var namespace = require("can-namespace");
  * var deparam = require("can-deparam");
  *
  * console.log(JSON.stringify(deparam("?foo=bar&number=1234"))); // -> '{"foo" : "bar", "number": 1234}'
- * console.log(JSON.stringify(deparam("#foo[]=bar&foo[]=baz"))); // -> '{"foo" : ["bar", "baz"]}'
+ * //console.log(JSON.stringify(deparam("#foo[]=bar&foo[]=baz"))); // -> '{"foo" : ["bar", "baz"]}'	// commented-out: only support flat-structure to avoid encoded-characters
+ * console.log(JSON.stringify(deparam("#foo=bar&foo=baz"))); // -> '{"foo" : ["bar", "baz"]}'
  * console.log(JSON.stringify(deparam("foo=bar%20%26%20baz"))); // -> '{"foo" : "bar & baz"}'
  * ```
  * @body
@@ -72,6 +73,7 @@ module.exports = namespace.deparam = function (params, valueDeserializer) {
 				value = prep(parts.join('=')),
 				current = data;
 			if (key) {
+				/* commented-out: only support flat-structure to avoid encoded-characters
 				parts = key.match(keyBreaker);
 				for (var j = 0, l = parts.length - 1; j < l; j++) {
 					var currentName = parts[j],
@@ -98,6 +100,22 @@ module.exports = namespace.deparam = function (params, valueDeserializer) {
 					current.push(valueDeserializer(value));
 				} else {
 					current[lastPart] = valueDeserializer(value);
+				}
+				*/
+				current = data[key];
+				if (current !== undefined) {
+					var currentIsArray = current instanceof Array;
+					if (!currentIsArray) {
+						// key exist and `current` is not an array yet. convert to an array
+						current = data[key] = [data[key]];
+					}
+				}
+				if (current instanceof Array) {
+					// `current` is an array. push value onto array
+					data[key].push(valueDeserializer(value));
+				} else {
+					// `current` is not an array. add item to `data`-hash
+					data[key] = valueDeserializer(value);
 				}
 			}
 		});
