@@ -38,10 +38,11 @@ var namespace = require("can-namespace");
  * <a class="jsbin-embed" href="https://jsbin.com/mobimok/3/embed?js,console">can-deparam on jsbin.com</a>
  * <script src="https://static.jsbin.com/js/embed.min.js?4.0.4"></script>
  */
+/* commented-out: only support flat-structure to avoid encoded-characters
 var digitTest = /^\d+$/,
-	/* commented-out: only support flat-structure to avoid encoded-characters
 	keyBreaker = /([^\[\]]+)|(\[\])/g,
-	*/
+*/
+var
 	paramTest = /([^?#]*)(#.*)?$/,
 	entityRegex = /%([^0-9a-f][0-9a-f]|[0-9a-f][^0-9a-f]|[^0-9a-f][^0-9a-f])/i,
 	prep = function (str) {
