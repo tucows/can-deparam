@@ -8,9 +8,9 @@ QUnit.test("Basic deparam", function(assert) {
 	var data = deparam("a=b");
 	assert.equal(data.a, "b");
 
-	var data = deparam("a=b&c=d");
-	assert.equal(data.a, "b");
-	assert.equal(data.c, "d");
+	var data2 = deparam("a=b&c=d");
+	assert.equal(data2.a, "b");
+	assert.equal(data2.c, "d");
 });
 
 /* commented-out: only support flat-structure to avoid encoded-characters

@@ -39,7 +39,9 @@ var namespace = require("can-namespace");
  * <script src="https://static.jsbin.com/js/embed.min.js?4.0.4"></script>
  */
 var digitTest = /^\d+$/,
+	/* commented-out: only support flat-structure to avoid encoded-characters
 	keyBreaker = /([^\[\]]+)|(\[\])/g,
+	*/
 	paramTest = /([^?#]*)(#.*)?$/,
 	entityRegex = /%([^0-9a-f][0-9a-f]|[0-9a-f][^0-9a-f]|[^0-9a-f][^0-9a-f])/i,
 	prep = function (str) {
@@ -55,16 +57,21 @@ var digitTest = /^\d+$/,
 		}
 	};
 
+/* commented-out: only support flat-structure to avoid encoded-characters
 function isArrayLikeName(name) {
 	return digitTest.test(name) || name === '[]';
 }
+*/
 
 
 function idenity(value){ return value; }
 
 module.exports = namespace.deparam = function (params, valueDeserializer) {
 	valueDeserializer = valueDeserializer || idenity;
+	/* commented-out: only support flat-structure to avoid encoded-characters
 	var data = {}, pairs, lastPart;
+	*/
+	var data = {}, pairs;
 	if (params && paramTest.test(params)) {
 		pairs = params.split('&');
 		pairs.forEach(function (pair) {
