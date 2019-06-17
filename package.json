@@ -1,6 +1,6 @@
 {
   "name": "can-deparam",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Deserialize a query string into an array or object.",
   "homepage": "https://canjs.com/doc/can-deparam.html",
   "repository": {
@@ -12,8 +12,8 @@
     "email": "contact@bitovi.com",
     "url": "https://www.bitovi.com/"
   },
-  "publishConfig":{
-    "registry":"https://nexus.ci.dev.tucows.net/repository/npm-ting-hosted/"
+  "publishConfig": {
+    "registry": "https://nexus.ci.dev.tucows.net/repository/npm-ting-hosted/"
   },
   "scripts": {
     "preversion": "npm test && npm run build",
